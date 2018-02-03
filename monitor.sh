@@ -125,6 +125,7 @@ show_result(){
 }
 
 
+
 # set variables for command line
 setVariables(){
     attempts=$1
@@ -140,23 +141,29 @@ setVariables(){
 
 #list all the record of the list
 listArray(){
+	echo ""
+    echo "###### BlackList #####"
+    echo "######################"
     for i in "${array[@]}"; 
     do 
-        echo $i; 
+        echo "#  $i #"; 
     done
-    echo 
+    echo "#####################"
+	echo ""
 }
 
 #add a piece of record into the list 
 addNewElement(){
     array+=("$1 1")
     notify-send -t 500 "the new element is $1"
+    listArray;
 }
 
 #delete a record from the list
 delElement(){
     unset 'array[$1]'
     notify-send -t 500 "unset the $1 th element"
+    listArray;
 }
 
 #update a record of the list
@@ -165,6 +172,7 @@ updateElement(){
     ((tmp++))
     array[$1]="$3 $tmp"
     notify-send -t 500 "update element ${array[$1]}"
+    listArray;
 }
 
 #judge if a visitor violate the rule and take measures
@@ -193,7 +201,6 @@ updateArray(){
     else
         updateElement $1 $2 $3;
     fi
-    echo $array
 }
 
 
@@ -258,7 +265,6 @@ elif [ "$1" = "-set" ]
 then 
     setVariables $2 $3 $1
 fi
-
 
 tail -n0 -f $path | \
 
