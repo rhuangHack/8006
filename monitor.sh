@@ -14,7 +14,6 @@
 #
 ################################################
 
-keywords='Failed password'
 attempt=3
 timeout=2
 path="/var/log/auth.log"
@@ -24,10 +23,11 @@ port=22
 app=`pwd`;
 ipt="/sbin/iptables"
 
+keywords='Failed password'
 fieldNo=13
 regx_on=0
-text='sdfs sdfs:ffff:192.2.3.4'
 ex='[0-9]+(\.[0-9]+){3}'
+text='sdfs sdfs:ffff:192.2.3.4'
 target=""
 
 # 
@@ -131,8 +131,9 @@ setVariables(){
     attempts=$1
     timeout=$2
     path=$3
+    port=$4
 
-    notify-send -t 500 "attempts: $attempts     timeout: $timeout   path: $path"
+    notify-send -t 500 "attempts: $attempts     timeout: $timeout   path: $path     port: $port"
 }
 
 
@@ -263,7 +264,7 @@ then
     gui_starter;
 elif [ "$1" = "-set" ]
 then 
-    setVariables $2 $3 $1
+    setVariables $2 $3 $4 $5
 fi
 
 tail -n0 -f $path | \
