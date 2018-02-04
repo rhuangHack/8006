@@ -1,0 +1,11 @@
+HOW-TO:
+======
+
+To start the application:use the default variables 3 attempts, time limit 3 minutes, log path is /var/log/secure
+./monitor.sh
+
+To set the variables by using command line: 2 attempts, time limit 3 minutes, log path is /var/log/secure
+./monitor.sh -set 2 3 /var/log/secure
+
+To set the variables by using GUI:
+./monitor.sh -gui
