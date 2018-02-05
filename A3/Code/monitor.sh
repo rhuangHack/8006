@@ -188,7 +188,13 @@ updateArray(){
         # do time limit 
         notify-send -t 500 "set a crontab job"
 	min=`date +"%M"`
+	
+	# deal with when the value less than 10, it will be 0X and can't do calculation
+	min=`bc -l <<< "$min"`
 	hour=`date +"%H"`
+	
+	# deal with when the value less than 10, it will be 0X and can't do calculation
+	hour=`bc -l <<< "$hour"`
 	((min=min+timeout))
 	((min=min%60))
 	if [ $timeout -gt 60 ]
